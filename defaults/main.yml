@@ -1,0 +1,24 @@
+---
+oauth_proxy_tag: 'v4.0.0'
+oauth_proxy_image: 'quay.io/pusher/oauth2_proxy:{{ oauth_proxy_tag }}'
+oauth_cont_name: oauth2
+oauth_github_org: 'status-im'
+
+# upstream
+oauth_upstream_cont: ~
+oauth_upstream_port: ~
+
+# domain under which the oauth will be available
+oauth_domain: ~
+oauth_public_port: ~
+oauth_local_port: ~
+
+# required auth options
+oauth_cookie_secret: ~
+oauth_id: ~
+oauth_secret: ~
+
+# generic container options
+cont_state: started
+cont_recreate: false
+cont_restart: false

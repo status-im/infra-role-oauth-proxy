@@ -1,0 +1,37 @@
+---
+- name: 'OAuth2 | Start container: {{ oauth_cont_name }}'
+  docker_container:
+    name: '{{ oauth_cont_name }}'
+    image: '{{ oauth_proxy_image }}'
+    pull: true
+    restart_policy: always
+    state: '{{ cont_state }}'
+    recreate: '{{ cont_recreate }}'
+    restart: '{{ cont_restart }}'
+    ports:
+      - '127.0.0.1:{{ oauth_local_port }}:{{ oauth_local_port | mandatory }}'
+    links:
+      - '{{ oauth_upstream_cont }}:upstream'
+    command: |
+      --email-domain='*'
+      --provider='github'
+      --github-org='{{ oauth_github_org | mandatory }}'
+      --cookie-domain='{{ oauth_domain }}'
+      --cookie-secret='{{ oauth_cookie_secret | mandatory }}'
+      --client-id='{{ oauth_id | mandatory }}'
+      --client-secret='{{ oauth_secret | mandatory }}'
+      --redirect-url='https://{{ oauth_domain }}/oauth2/callback'
+      --http-address='0.0.0.0:{{ oauth_local_port | mandatory }}'
+      --upstream='http://upstream:{{ oauth_upstream_port | mandatory }}/'
+      --request-logging=false
+
+- name: 'OAuth2 | Enable public port: {{ oauth_public_port }}'
+  iptables:
+    comment: 'OAuth Public Port'
+    chain: INPUT
+    jump: ACCEPT
+    source: '0.0.0.0/0'
+    protocol: 'tcp'
+    destination_port: '{{ oauth_public_port }}'
+  notify:
+    - Save iptables rules
