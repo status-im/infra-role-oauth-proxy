@@ -16,3 +16,5 @@ oauth_cookie_secret: '123qweASD'
 oauth_id: 'some-id'
 oauth_secret: 'some-secret'
 ```
+
+The `oauth_upstream_cont` is optional. If not set the Docker host IP will be used as `upstream`.

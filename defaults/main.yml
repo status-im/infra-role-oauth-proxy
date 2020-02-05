@@ -5,8 +5,14 @@ oauth_cont_name: oauth2
 oauth_github_org: 'status-im'
 
 # upstream
-oauth_upstream_cont: ~
 oauth_upstream_port: ~
+# If set container is linked, otherwise we access docker host IP
+oauth_upstream_cont: ~
+
+# container setttings
+oauth_cont_links: []
+oauth_cont_etc_hosts:
+  upstream: '{{ ansible_all_ipv4_addresses[0] }}'
 
 # domain under which the oauth will be available
 oauth_domain: ~
