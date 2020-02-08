@@ -1,6 +1,4 @@
 ---
-- debug: var=hostvars[inventory_hostname]
-
 # By default we use the docker host IP as upstream.
 # If oauth_upstream_cont is set link the container as upstream.
 - name: 'OAuth Proxy | Set upstream variables'
