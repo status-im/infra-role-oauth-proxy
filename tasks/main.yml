@@ -5,7 +5,7 @@
   set_fact:
     oauth_cont_links: ['{{ oauth_upstream_cont | mandatory }}:upstream']
     oauth_cont_etc_hosts: {}
-  when: (oauth_upstream_cont | bool) == true
+  when: oauth_upstream_cont is not none
 
 - name: 'OAuth Proxy | Start container: {{ oauth_cont_name }}'
   docker_container:
