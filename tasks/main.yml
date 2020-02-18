@@ -40,6 +40,6 @@
     jump: ACCEPT
     source: '0.0.0.0/0'
     protocol: 'tcp'
-    destination_port: '{{ oauth_public_port }}'
+    destination_port: '{{ oauth_public_port | string }}'
   notify:
     - Save iptables rules
