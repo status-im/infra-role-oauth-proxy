@@ -4,6 +4,8 @@ oauth_proxy_image: 'quay.io/pusher/oauth2_proxy:{{ oauth_proxy_tag }}'
 oauth_cont_name: oauth2
 oauth_github_org: 'status-im'
 
+# name used within container
+oauth_upstream_name: 'upstream'
 # upstream
 oauth_upstream_port: ~
 # If set container is linked, otherwise we access docker host IP
@@ -11,6 +13,7 @@ oauth_upstream_cont: ~
 
 # container setttings
 oauth_cont_links: []
+oauth_cont_networks: []
 oauth_cont_etc_hosts:
   upstream: '{{ ansible_all_ipv4_addresses[0] }}'
 

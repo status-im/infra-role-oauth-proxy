@@ -20,6 +20,8 @@
       - '127.0.0.1:{{ oauth_local_port }}:{{ oauth_local_port | mandatory }}'
     links: '{{ oauth_cont_links | mandatory }}'
     etc_hosts: '{{ oauth_cont_etc_hosts | mandatory }}'
+    networks: '{{ oauth_cont_networks | mandatory }}'
+    networks_cli_compatible: true
     command: |
       --email-domain='*'
       --provider='github'
@@ -30,7 +32,7 @@
       --client-secret='{{ oauth_secret | mandatory }}'
       --redirect-url='https://{{ oauth_domain }}/oauth2/callback'
       --http-address='0.0.0.0:{{ oauth_local_port | mandatory }}'
-      --upstream='http://upstream:{{ oauth_upstream_port | mandatory }}/'
+      --upstream='http://{{ oauth_upstream_name }}:{{ oauth_upstream_port | mandatory }}/'
       --request-logging=false
 
 - name: 'OAuth Proxy | Enable public port: {{ oauth_public_port }}'
