@@ -1,6 +1,6 @@
 ---
-oauth_proxy_tag: 'v5.0.0'
-oauth_proxy_image: 'quay.io/pusher/oauth2_proxy:{{ oauth_proxy_tag }}'
+oauth_proxy_tag: 'v7.0.0-amd64'
+oauth_proxy_image: 'quay.io/oauth2-proxy/oauth2-proxy:{{ oauth_proxy_tag }}'
 oauth_cont_name: oauth2
 oauth_github_org: 'status-im'
 
