@@ -1,5 +1,5 @@
 ---
-oauth_proxy_tag: 'v7.0.0-amd64'
+oauth_proxy_tag: 'v7.1.3-amd64'
 oauth_proxy_image: 'quay.io/oauth2-proxy/oauth2-proxy:{{ oauth_proxy_tag }}'
 oauth_cont_name: oauth2
 oauth_github_org: 'status-im'
@@ -19,7 +19,6 @@ oauth_cont_etc_hosts:
 
 # domain under which the oauth will be available
 oauth_domain: ~
-oauth_public_port: ~
 oauth_local_port: ~
 
 # required auth options
