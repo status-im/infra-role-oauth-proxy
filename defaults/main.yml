@@ -1,32 +1,46 @@
 ---
-oauth_proxy_tag: 'v7.2.1-amd64'
-oauth_proxy_image: 'quay.io/oauth2-proxy/oauth2-proxy:{{ oauth_proxy_tag }}'
-oauth_cont_name: oauth2
-oauth_github_org: 'status-im'
+oauth_service_name: 'oauth'
+oauth_service_path: '/docker/{{ oauth_service_name }}'
+oauth_compose_path: '{{ oauth_service_path }}/docker-compose.yml'
 
-# name used within container
-oauth_upstream_name: 'upstream'
-# upstream
+oauth_service_user: 'dockremap'
+oauth_service_group: 'docker'
+
+# Container
+oauth_cont_name: '{{ oauth_service_name }}'
+oauth_cont_tag: 'v7.2.1-amd64'
+oauth_cont_image: 'quay.io/oauth2-proxy/oauth2-proxy:{{ oauth_cont_tag }}'
+oauth_cont_volumes: []
+oauth_local_port: 4180
+oauth_local_addr: '127.0.0.1'
+
+# Upstream address, port, or just full URL.
+oauth_upstream_addr: 'upstream'
 oauth_upstream_port: ~
+oauth_upstream_url: 'http://{{ oauth_upstream_addr }}:{{ oauth_upstream_port | mandatory }}/'
 # If set container is linked, otherwise we access docker host IP
 oauth_upstream_cont: ~
 
 # container setttings
-oauth_cont_links: []
 oauth_cont_networks: []
 oauth_cont_etc_hosts:
-  upstream: '{{ ansible_all_ipv4_addresses[0] }}'
+  upstream: 'host-gateway'
 
 # domain under which the oauth will be available
 oauth_domain: ~
-oauth_local_port: ~
+oauth_callback: '/oauth2/callback'
+
+# Providers
+oauth_provider: 'github'
+oauth_github_org: 'status-im'
+oauth_google_domain: 'status.im'
 
 # required auth options
 oauth_cookie_secret: ~
 oauth_id: ~
 oauth_secret: ~
 
-# generic container options
-cont_state: started
-cont_recreate: false
-cont_restart: false
+# general container management
+compose_recreate: 'smart'
+compose_state: 'present'
+compose_restart: false

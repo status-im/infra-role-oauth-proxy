@@ -1,0 +1,40 @@
+---
+version: '3.7'
+services:
+  oauth:
+    container_name: '{{ oauth_cont_name }}'
+    image: '{{ oauth_cont_image }}'
+    restart: always
+    ports:
+      - '{{ oauth_local_addr }}:{{ oauth_local_port }}:{{ oauth_local_port | mandatory }}/tcp'
+    extra_hosts: {{ oauth_cont_etc_hosts | to_json }}
+{% if oauth_cont_volumes %}
+    volumes: {{ oauth_cont_volumes | to_json }}
+{% endif %}
+{% if oauth_cont_networks %}
+    networks: {{ oauth_cont_networks | to_json }}
+{% endif %}
+    command: |
+      --provider='{{ oauth_provider }}'
+{% if oauth_provider == "github" %}
+      --github-org='{{ oauth_github_org | mandatory }}'
+      --email-domain='*'
+{% elif oauth_provider == "google" %}
+      --email-domain='{{ oauth_google_domain | mandatory }}'
+{% endif %}
+      --cookie-domain='{{ oauth_domain }}'
+      --cookie-secret='{{ oauth_cookie_secret | mandatory }}'
+      --client-id='{{ oauth_id | mandatory }}'
+      --client-secret='{{ oauth_secret | mandatory }}'
+      --redirect-url='https://{{ oauth_domain }}{{ oauth_callback }}'
+      --http-address='0.0.0.0:{{ oauth_local_port | mandatory }}'
+      --upstream='{{ oauth_upstream_url | mandatory }}'
+      --request-logging=false
+{% if oauth_cont_networks %}
+
+networks:
+{% for network in oauth_cont_networks %}
+  {{network}}:
+    external: true
+{% endfor %}
+{% endif %}

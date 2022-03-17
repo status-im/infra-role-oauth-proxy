@@ -1,36 +1,22 @@
 ---
-# By default we use the docker host IP as upstream.
-# If oauth_upstream_cont is set link the container as upstream.
-- name: 'OAuth Proxy | Set upstream variables'
-  set_fact:
-    oauth_cont_links: ['{{ oauth_upstream_cont | mandatory }}:upstream']
-    oauth_cont_etc_hosts: {}
-  when: oauth_upstream_cont is not none
+- name: 'OAuth Proxy | Create directory'
+  file:
+    path: '{{ oauth_service_path }}'
+    state: 'directory'
+    recurse: true
 
-- name: 'OAuth Proxy | Start container: {{ oauth_cont_name }}'
-  docker_container:
-    name: '{{ oauth_cont_name }}'
-    image: '{{ oauth_proxy_image }}'
+- name: 'OAuth Proxy | Create compose file'
+  template:
+    src: 'docker-compose.yml.j2'
+    dest: '{{ oauth_compose_path }}'
+    owner: '{{ oauth_service_user }}'
+    group: '{{ oauth_service_group }}'
+    mode: 0644
+
+- name: 'OAuth Proxy | Create container'
+  docker_compose:
+    project_src: '{{ oauth_service_path }}'
     pull: true
-    restart_policy: always
-    state: '{{ cont_state }}'
-    recreate: '{{ cont_recreate }}'
-    restart: '{{ cont_restart }}'
-    ports:
-      - '127.0.0.1:{{ oauth_local_port }}:{{ oauth_local_port | mandatory }}'
-    links: '{{ oauth_cont_links | mandatory }}'
-    etc_hosts: '{{ oauth_cont_etc_hosts | mandatory }}'
-    networks: '{{ oauth_cont_networks | mandatory }}'
-    networks_cli_compatible: true
-    command: |
-      --email-domain='*'
-      --provider='github'
-      --github-org='{{ oauth_github_org | mandatory }}'
-      --cookie-domain='{{ oauth_domain }}'
-      --cookie-secret='{{ oauth_cookie_secret | mandatory }}'
-      --client-id='{{ oauth_id | mandatory }}'
-      --client-secret='{{ oauth_secret | mandatory }}'
-      --redirect-url='https://{{ oauth_domain }}/oauth2/callback'
-      --http-address='0.0.0.0:{{ oauth_local_port | mandatory }}'
-      --upstream='http://{{ oauth_upstream_name }}:{{ oauth_upstream_port | mandatory }}/'
-      --request-logging=false
+    state: '{{ compose_state }}'
+    restarted: '{{ compose_restart }}'
+    recreate: '{{ compose_recreate }}'

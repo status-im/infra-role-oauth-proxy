@@ -6,14 +6,31 @@ This role configures an [oauth2_proxy](https://github.com/pusher/oauth2_proxy) c
 
 These settings are all mandatory:
 ```yaml
+oauth_service_name: 'example-oauth'
+oauth_service_path: '/docker/example/oauth'
 oauth_domain: 'oauth.example.org'
-oauth_cont_name: 'some-container-name-oauth'
-oauth_upstream_cont: 'some-container-name'
 oauth_upstream_port: 4321
 oauth_local_port: 1234
 oauth_cookie_secret: '123qweASD'
+oauth_provider: 'github'
+oauth_github_org: 'example-org'
 oauth_id: 'some-id'
 oauth_secret: 'some-secret'
 ```
+Some options are optional:
+```yaml
+oauth_local_addr: '0.0.0.0'
+oauth_cont_volumes: ['/docker/example/www:/www']
+oauth_upstream_url: 'file:///www#/'
+oauth_cont_networks: ['other-container-network']
+```
 
-The `oauth_upstream_cont` is optional. If not set the Docker host IP will be used as `upstream`.
+# Management
+
+The container is reated using Docker Compose:
+```
+admin@host.example.org:/docker/example % dc ps
+       Name                Command               State           Ports         
+-------------------------------------------------------------------------------
+example-oauth   /bin/oauth2-proxy --provid ...   Up      0.0.0.0:9292->9292/tcp
+```
