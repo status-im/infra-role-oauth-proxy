@@ -30,6 +30,7 @@ services:
       --http-address='0.0.0.0:{{ oauth_local_port | mandatory }}'
       --upstream='{{ oauth_upstream_url | mandatory }}'
       --request-logging=false
+      --reverse-proxy=true
 {% if oauth_cont_networks %}
 
 networks:
