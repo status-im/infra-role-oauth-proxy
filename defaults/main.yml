@@ -12,14 +12,12 @@ oauth_cont_tag: 'v7.2.1-amd64'
 oauth_cont_image: 'quay.io/oauth2-proxy/oauth2-proxy:{{ oauth_cont_tag }}'
 oauth_cont_volumes: []
 oauth_local_port: 4180
-oauth_local_addr: '127.0.0.1'
+oauth_local_addr: '0.0.0.0'
 
 # Upstream address, port, or just full URL.
 oauth_upstream_addr: 'upstream'
 oauth_upstream_port: ~
 oauth_upstream_url: 'http://{{ oauth_upstream_addr }}:{{ oauth_upstream_port | mandatory }}/'
-# If set container is linked, otherwise we access docker host IP
-oauth_upstream_cont: ~
 
 # container setttings
 oauth_cont_networks: []
