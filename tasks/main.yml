@@ -20,3 +20,21 @@
     state: '{{ compose_state }}'
     restarted: '{{ compose_restart }}'
     recreate: '{{ compose_recreate }}'
+
+- name: 'OAuth Proxy | Create Consul service'
+  include_role: name=consul-service
+  vars:
+    consul_config_name: 'oauth-proxy-{{ oauth_domain }}'
+    consul_services:
+      - id: 'oauth-proxy-{{ oauth_domain }}'
+        name: 'ssl-proxy-backend'
+        tags: ['ssl-proxy-backend', 'site', 'oauth-proxy']
+        port: '{{ oauth_local_port }}'
+        address: '{{ ansible_local.wireguard.vpn_ip }}'
+        meta:
+          proxy_fqdn: '{{ oauth_domain }}'
+        checks:
+          - id: 'oauth-proxy-{{ oauth_domain }}-health'
+            name: 'OAuth Proxy Healthcheck'
+            type: 'http'
+            http: 'http://localhost:{{ oauth_local_port }}/ping'
