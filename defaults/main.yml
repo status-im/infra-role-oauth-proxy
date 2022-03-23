@@ -38,6 +38,9 @@ oauth_cookie_secret: ~
 oauth_id: ~
 oauth_secret: ~
 
+# Extra
+oauth_logo_url: 'https://status.im/img/logo.svg'
+
 # general container management
 compose_recreate: 'smart'
 compose_state: 'present'

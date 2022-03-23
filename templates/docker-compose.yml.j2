@@ -29,6 +29,9 @@ services:
       --redirect-url='https://{{ oauth_domain }}{{ oauth_callback }}'
       --http-address='0.0.0.0:{{ oauth_local_port | mandatory }}'
       --upstream='{{ oauth_upstream_url | mandatory }}'
+{% if oauth_logo_url %}
+      --custom-sign-in-logo={{ oauth_logo_url | mandatory }}
+{% endif %}
       --request-logging=false
       --reverse-proxy=true
 {% if oauth_cont_networks %}
