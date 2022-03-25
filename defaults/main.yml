@@ -41,6 +41,11 @@ oauth_secret: ~
 # Extra
 oauth_logo_url: 'https://status.im/img/logo.svg'
 
+# Consul
+oauth_consul_service_name: 'oauth-proxy'
+oauth_consul_service_id: 'oauth-proxy:{{ oauth_domain }}'
+oauth_consul_service_tags: ['oauth-proxy', 'ssl-proxy-backend', 'site']
+
 # general container management
 compose_recreate: 'smart'
 compose_state: 'present'
