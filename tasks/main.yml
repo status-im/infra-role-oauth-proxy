@@ -16,6 +16,7 @@
 - name: 'OAuth Proxy | Create container'
   docker_compose:
     project_src: '{{ oauth_service_path }}'
+    project_name: '{{ oauth_service_name }}'
     pull: true
     state: '{{ compose_state }}'
     restarted: '{{ compose_restart }}'
