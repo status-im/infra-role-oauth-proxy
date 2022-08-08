@@ -28,6 +28,11 @@ oauth_cont_etc_hosts:
 oauth_domain: ~
 oauth_callback: '/oauth2/callback'
 
+# Skip auth for these paths.
+oauth_skip_auth_routes: []
+#  - 'POST=/ping'
+#  - '/webhook'
+
 # Providers
 oauth_provider: 'github'
 oauth_github_org: 'status-im'

@@ -34,6 +34,9 @@ services:
 {% endif %}
       --request-logging=false
       --reverse-proxy=true
+{% for route in oauth_skip_auth_routes %}
+      --skip-auth-route={{ route }}
+{% endfor %}
 {% if oauth_cont_networks %}
 
 networks:
