@@ -18,6 +18,7 @@ services:
       --provider='{{ oauth_provider }}'
 {% if oauth_provider == "github" %}
       --github-org='{{ oauth_github_org | mandatory }}'
+      --scope='{{ oauth_scope }}'
       --email-domain='*'
 {% elif oauth_provider == "google" %}
       --email-domain='{{ oauth_google_domain | mandatory }}'

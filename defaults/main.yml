@@ -45,6 +45,7 @@ oauth_secret: ~
 
 # Extra
 oauth_logo_url: 'https://status.im/img/logo.svg'
+oauth_scope: 'user:email'
 
 # Consul
 oauth_consul_service_name: 'oauth-proxy'
