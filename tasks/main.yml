@@ -16,7 +16,7 @@
 - name: 'OAuth Proxy | Create container'
   docker_compose:
     project_src: '{{ oauth_service_path }}'
-    project_name: '{{ oauth_service_name }}'
+    files: ['{{ oauth_compose_path }}']
     pull: true
     state: '{{ compose_state }}'
     restarted: '{{ compose_restart }}'
@@ -30,7 +30,7 @@
       - id:   '{{ oauth_consul_service_id }}'
         name: '{{ oauth_consul_service_name }}'
         tags: '{{ oauth_consul_service_tags }}'
-        port: '{{ oauth_local_port }}'
+        port: '{{ oauth_consul_service_port }}'
         address: '{{ ansible_local.wireguard.vpn_ip }}'
         meta:
           proxy_fqdn: '{{ oauth_domain }}'

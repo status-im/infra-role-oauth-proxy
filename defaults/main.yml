@@ -48,6 +48,7 @@ oauth_logo_url: 'https://status.im/img/logo.svg'
 oauth_scope: 'user:email'
 
 # Consul
+oauth_consul_service_port: '{{ oauth_local_port }}'
 oauth_consul_service_name: 'oauth-proxy'
 oauth_consul_service_id: 'oauth-proxy:{{ oauth_domain }}'
 oauth_consul_service_tags: ['oauth-proxy', 'ssl-proxy-backend', 'site']
