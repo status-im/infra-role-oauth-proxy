@@ -34,6 +34,7 @@
         address: '{{ ansible_local.wireguard.vpn_ip }}'
         meta:
           proxy_fqdn: '{{ oauth_domain }}'
+          version: '{{ oauth_version }}'
         checks:
           - id: 'oauth-proxy-health:{{ oauth_domain }}'
             name: 'OAuth Proxy Healthcheck'

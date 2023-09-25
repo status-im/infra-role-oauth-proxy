@@ -6,9 +6,15 @@ oauth_compose_path: '{{ oauth_service_path }}/docker-compose.yml'
 oauth_service_user: 'dockremap'
 oauth_service_group: 'docker'
 
+# Architectures
+oauth_archs_map:
+  x86_64:  'amd64'
+  aarch64: 'arm64'
+
 # Container
+oauth_version: '7.4.0'
 oauth_cont_name: '{{ oauth_service_name }}'
-oauth_cont_tag: 'v7.4.0-amd64'
+oauth_cont_tag: 'v{{ oauth_version }}-{{ oauth_archs_map[ansible_architecture] }}'
 oauth_cont_image: 'quay.io/oauth2-proxy/oauth2-proxy:{{ oauth_cont_tag }}'
 oauth_cont_volumes: []
 oauth_local_port: 4180
