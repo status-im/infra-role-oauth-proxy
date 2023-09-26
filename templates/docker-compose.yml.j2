@@ -20,6 +20,9 @@ services:
       --github-org='{{ oauth_github_org | mandatory }}'
       --scope='{{ oauth_scope }}'
       --email-domain='*'
+{% if (oauth_github_teams|length) > 0 %}
+      --github-team='{{ oauth_github_teams | join(",") }}'
+{% endif %}
 {% elif oauth_provider == "google" %}
       --email-domain='{{ oauth_google_domain | mandatory }}'
 {% endif %}

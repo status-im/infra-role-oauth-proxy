@@ -42,6 +42,7 @@ oauth_skip_auth_routes: []
 # Providers
 oauth_provider: 'github'
 oauth_github_org: 'status-im'
+oauth_github_teams: []
 oauth_google_domain: 'status.im'
 
 # required auth options

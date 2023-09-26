@@ -14,6 +14,7 @@ oauth_local_port: 1234
 oauth_cookie_secret: '123qweASD'
 oauth_provider: 'github'
 oauth_github_org: 'example-org'
+oauth_github_teams: ['devops', 'security']
 oauth_id: 'some-id'
 oauth_secret: 'some-secret'
 ```
