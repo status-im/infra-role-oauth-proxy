@@ -25,6 +25,19 @@ services:
 {% endif %}
 {% elif oauth_provider == "google" %}
       --email-domain='{{ oauth_google_domain | mandatory }}'
+{% elif oauth_provider == "keycloak" %}
+      --scope='{{ oauth_scope }}'
+      --login-url='{{ oauth_keycloak_login_url }}'
+      --redeem-url='{{ oauth_keycloak_redeem_url }}'
+      --profile-url='{{ oauth_keycloak_profile_url }}'
+      --validate-url='{{ oauth_keycloak_validate_url }}'
+      --email-domain='{{ oauth_keycloak_domain | mandatory }}'
+{% for group in oauth_keycloak_groups %}
+      --keycloak-group={{ group }}
+{% endfor %}
+{% for role in oauth_keycloak_roles %}
+      --allowed-role={{ role }}
+{% endfor %}
 {% endif %}
       --cookie-domain='{{ oauth_domain }}'
       --cookie-secret='{{ oauth_cookie_secret | mandatory }}'

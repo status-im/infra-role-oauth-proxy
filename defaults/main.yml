@@ -41,9 +41,21 @@ oauth_skip_auth_routes: []
 
 # Providers
 oauth_provider: 'github'
+# Github
 oauth_github_org: 'status-im'
 oauth_github_teams: []
+# Google
 oauth_google_domain: 'status.im'
+# Keycloak
+oauth_keycloak_url: 'https://auth.logos.co'
+oauth_keycloak_realm: 'logos-co'
+oauth_keycloak_domain: '*'
+oauth_keycloak_groups: ['infra']
+oauth_keycloak_roles: []
+oauth_keycloak_login_url: '{{ oauth_keycloak_url }}/realms/{{ oauth_keycloak_realm }}/protocol/openid-connect/auth'
+oauth_keycloak_redeem_url: '{{ oauth_keycloak_url }}/realms/{{ oauth_keycloak_realm }}/protocol/openid-connect/token'
+oauth_keycloak_profile_url:  '{{ oauth_keycloak_url }}/realms/{{ oauth_keycloak_realm }}/protocol/openid-connect/userinfo'
+oauth_keycloak_validate_url:  '{{ oauth_keycloak_url }}/realms/{{ oauth_keycloak_realm }}/protocol/openid-connect/userinfo'
 
 # required auth options
 oauth_cookie_secret: ~

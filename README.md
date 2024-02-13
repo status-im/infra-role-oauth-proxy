@@ -13,8 +13,6 @@ oauth_upstream_port: 4321
 oauth_local_port: 1234
 oauth_cookie_secret: '123qweASD'
 oauth_provider: 'github'
-oauth_github_org: 'example-org'
-oauth_github_teams: ['devops', 'security']
 oauth_id: 'some-id'
 oauth_secret: 'some-secret'
 ```
@@ -24,6 +22,26 @@ oauth_local_addr: '0.0.0.0'
 oauth_cont_volumes: ['/docker/example/www:/www']
 oauth_upstream_url: 'file:///www#/'
 oauth_cont_networks: ['other-container-network']
+```
+Different providers have different mandatory settings.
+
+### GitHub
+```yaml
+oauth_github_org: 'example-org'
+oauth_github_teams: ['devops', 'security']
+```
+### Google
+```yaml
+oauth_google_domain: 'example.org'
+```
+### Keycloak
+```yaml
+oauth_keycloak_url: 'https://keycloak.example.org'
+oauth_keycloak_realm: 'example-org'
+oauth_keycloak_domain: 'example.org'
+oauth_keycloak_groups: ['admins', 'security']
+oauth_keycloak_roles: ['admin']
+oauth_scope: 'openid'
 ```
 
 # Management
