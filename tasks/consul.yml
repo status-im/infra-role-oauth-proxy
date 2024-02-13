@@ -1,0 +1,19 @@
+---
+- name: 'OAuth Proxy | Create Consul service'
+  include_role: name=consul-service
+  vars:
+    consul_config_name: '{{ oauth_consul_service_id }}'
+    consul_services:
+      - id:   '{{ oauth_consul_service_id }}'
+        name: '{{ oauth_consul_service_name }}'
+        tags: '{{ oauth_consul_service_tags }}'
+        port: '{{ oauth_consul_service_port }}'
+        address: '{{ ansible_local.wireguard.vpn_ip }}'
+        meta:
+          proxy_fqdn: '{{ oauth_domain }}'
+          version: '{{ oauth_version }}'
+        checks:
+          - id: 'oauth-proxy-health:{{ oauth_domain }}'
+            name: 'OAuth Proxy Healthcheck'
+            type: 'http'
+            http: 'http://localhost:{{ oauth_local_port }}/ping'

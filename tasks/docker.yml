@@ -1,0 +1,23 @@
+---
+- name: 'OAuth Proxy | Create directory'
+  file:
+    path: '{{ oauth_service_path }}'
+    state: 'directory'
+    recurse: true
+
+- name: 'OAuth Proxy | Create compose file'
+  template:
+    src: 'docker-compose.yml.j2'
+    dest: '{{ oauth_compose_path }}'
+    owner: '{{ oauth_service_user }}'
+    group: '{{ oauth_service_group }}'
+    mode: 0644
+
+- name: 'OAuth Proxy | Create container'
+  docker_compose:
+    project_src: '{{ oauth_service_path }}'
+    files: ['{{ oauth_compose_path }}']
+    pull: true
+    state: '{{ compose_state }}'
+    restarted: '{{ compose_restart }}'
+    recreate: '{{ compose_recreate }}'
