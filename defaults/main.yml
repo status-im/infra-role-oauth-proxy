@@ -64,7 +64,7 @@ oauth_secret: ~
 
 # Extra
 oauth_logo_url: 'https://status.im/img/logo.svg'
-oauth_scope: 'user:email'
+oauth_scope: 'user:email read:org'
 
 # Consul
 oauth_consul_service_port: '{{ oauth_local_port }}'
