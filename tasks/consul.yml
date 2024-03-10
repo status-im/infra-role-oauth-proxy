@@ -1,6 +1,6 @@
 ---
 - name: 'OAuth Proxy | Create Consul service'
-  include_role: name=consul-service
+  include_role: name=infra-role-consul-service
   vars:
     consul_config_name: '{{ oauth_consul_service_id }}'
     consul_services:
