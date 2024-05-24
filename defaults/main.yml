@@ -63,7 +63,7 @@ oauth_id: ~
 oauth_secret: ~
 
 # Extra
-oauth_logo_url: 'https://status.im/img/logo.svg'
+oauth_logo_url: 'https://status.app/assets/favicon/default.png'
 oauth_scope: 'user:email read:org'
 
 # Consul
