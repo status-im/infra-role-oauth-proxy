@@ -40,7 +40,7 @@ oauth_skip_auth_routes: []
 #  - '/webhook'
 
 # Providers
-oauth_provider: 'github'
+oauth_provider: 'github' # github, google, keycloak
 # Github
 oauth_github_org: 'status-im'
 oauth_github_teams: []
@@ -64,7 +64,10 @@ oauth_secret: ~
 
 # Extra
 oauth_logo_url: 'https://status.app/assets/favicon/default.png'
-oauth_scope: 'user:email read:org'
+oauth_provider_scopes:
+  github: 'user:email read:org'
+  keycloak: 'openid'
+oauth_scope: '{{ oauth_provider_scopes.get("oauth_provider", "") }}'
 
 # Consul
 oauth_consul_service_port: '{{ oauth_local_port }}'
