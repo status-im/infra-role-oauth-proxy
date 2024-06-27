@@ -14,10 +14,9 @@
     mode: 0644
 
 - name: 'OAuth Proxy | Create container'
-  docker_compose:
+  community.docker.docker_compose_v2:
     project_src: '{{ oauth_service_path }}'
     files: ['{{ oauth_compose_path }}']
-    pull: true
+    pull: '{{ compose_pull }}'
     state: '{{ compose_state }}'
-    restarted: '{{ compose_restart }}'
     recreate: '{{ compose_recreate }}'
