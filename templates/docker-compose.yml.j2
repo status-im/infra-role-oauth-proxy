@@ -24,13 +24,11 @@ services:
 {% endif %}
 {% elif oauth_provider == "google" %}
       --email-domain='{{ oauth_google_domain | mandatory }}'
-{% elif oauth_provider == "keycloak" %}
+{% elif oauth_provider == "keycloak-oidc" %}
       --scope='{{ oauth_scope }}'
-      --login-url='{{ oauth_keycloak_login_url }}'
-      --redeem-url='{{ oauth_keycloak_redeem_url }}'
-      --profile-url='{{ oauth_keycloak_profile_url }}'
-      --validate-url='{{ oauth_keycloak_validate_url }}'
+      --oidc-issuer-url='{{ oauth_keycloak_oidc_issuer_url | mandatory }}'
       --email-domain='{{ oauth_keycloak_domain | mandatory }}'
+      --code-challenge-method='{{ oauth_keycloak_code_challenge_method }}'
 {% for group in oauth_keycloak_groups %}
       --keycloak-group={{ group }}
 {% endfor %}

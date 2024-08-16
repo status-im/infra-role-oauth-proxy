@@ -40,7 +40,7 @@ oauth_skip_auth_routes: []
 #  - '/webhook'
 
 # Providers
-oauth_provider: 'github' # github, google, keycloak
+oauth_provider: 'github' # github, google, keycloak-oidc
 # Github
 oauth_github_org: 'status-im'
 oauth_github_teams: []
@@ -52,10 +52,8 @@ oauth_keycloak_realm: 'logos-co'
 oauth_keycloak_domain: '*'
 oauth_keycloak_groups: ['infra']
 oauth_keycloak_roles: []
-oauth_keycloak_login_url: '{{ oauth_keycloak_url }}/realms/{{ oauth_keycloak_realm }}/protocol/openid-connect/auth'
-oauth_keycloak_redeem_url: '{{ oauth_keycloak_url }}/realms/{{ oauth_keycloak_realm }}/protocol/openid-connect/token'
-oauth_keycloak_profile_url:  '{{ oauth_keycloak_url }}/realms/{{ oauth_keycloak_realm }}/protocol/openid-connect/userinfo'
-oauth_keycloak_validate_url:  '{{ oauth_keycloak_url }}/realms/{{ oauth_keycloak_realm }}/protocol/openid-connect/userinfo'
+oauth_keycloak_oidc_issuer_url: '{{ oauth_keycloak_url }}/realms/{{ oauth_keycloak_realm }}'
+oauth_keycloak_code_challenge_method: 'S256'
 
 # required auth options
 oauth_cookie_secret: ~
@@ -66,8 +64,8 @@ oauth_secret: ~
 oauth_logo_url: 'https://status.app/assets/favicon/default.png'
 oauth_provider_scopes:
   github: 'user:email read:org'
-  keycloak: 'openid'
-oauth_scope: '{{ oauth_provider_scopes.get("oauth_provider", "") }}'
+  keycloak-oidc: 'openid'
+oauth_scope: '{{ oauth_provider_scopes.get(oauth_provider, "") }}'
 
 # Consul
 oauth_consul_service_port: '{{ oauth_local_port }}'
