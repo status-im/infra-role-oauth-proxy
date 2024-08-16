@@ -30,7 +30,7 @@ services:
       --email-domain='{{ oauth_keycloak_domain | mandatory }}'
       --code-challenge-method='{{ oauth_keycloak_code_challenge_method }}'
 {% for group in oauth_keycloak_groups %}
-      --keycloak-group={{ group }}
+      --allowed-group={{ group }}
 {% endfor %}
 {% for role in oauth_keycloak_roles %}
       --allowed-role={{ role }}
