@@ -44,6 +44,8 @@ oauth_keycloak_roles: ['admin']
 oauth_scope: 'openid'
 ```
 
+In order for Keycloak client to work with oauth-proxy, the way to set up the Keycloak client is described [here](https://oauth2-proxy.github.io/oauth2-proxy/configuration/providers/keycloak_oidc/) under `Keycloak new admin console`. Important part is to configure the dedicated audience mapper for your client.
+
 # Management
 
 The container is reated using Docker Compose:
