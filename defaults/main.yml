@@ -50,7 +50,7 @@ oauth_google_domain: 'status.im'
 oauth_keycloak_url: 'https://auth.logos.co'
 oauth_keycloak_realm: 'logos-co'
 oauth_keycloak_domain: '*'
-oauth_keycloak_groups: ['infra']
+oauth_keycloak_groups: []
 oauth_keycloak_roles: []
 oauth_keycloak_oidc_issuer_url: '{{ oauth_keycloak_url }}/realms/{{ oauth_keycloak_realm }}'
 oauth_keycloak_code_challenge_method: 'S256'
