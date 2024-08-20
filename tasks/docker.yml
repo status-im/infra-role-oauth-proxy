@@ -20,3 +20,4 @@
     pull: '{{ compose_pull }}'
     state: '{{ compose_state }}'
     recreate: '{{ compose_recreate }}'
+  when: not oauth_compose_skip_start
