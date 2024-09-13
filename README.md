@@ -63,3 +63,18 @@ admin@host.example.org:/docker/example % dc ps
 -------------------------------------------------------------------------------
 example-oauth   /bin/oauth2-proxy --provid ...   Up      0.0.0.0:9292->9292/tcp
 ```
+
+# Known issues
+
+Provider: `keycloak-oidc`, Service: [`Prometheus UI`](https://prometheus.infra.status.im/)
+
+The setup is composed out of Nginx proxy in front of OAuth2 proxy container. After logging in, we got `502 Bad Gateway` on Nginx proxy. By inspecting Nginx error logs there was this error:
+```
+2024/09/13 12:27:40 [error] 1699601#1699601: *28212 upstream sent too big header while reading response header from upstream...
+```
+We just had to increase proxy buffer sizes in the Nginx config and everything was working normal:
+```
+  proxy_buffering on;
+  proxy_buffers 16 256k;
+  proxy_buffer_size 128k;
+``` 
