@@ -61,7 +61,7 @@ oauth_id: ~
 oauth_secret: ~
 
 # Extra
-oauth_logo_url: 'https://status.app/assets/favicon/default.png'
+oauth_logo_url: 'https://status-misc.ams3.digitaloceanspaces.com/images/IFT-mark-blue.png'
 oauth_provider_scopes:
   github: 'user:email read:org'
   keycloak-oidc: 'openid'
