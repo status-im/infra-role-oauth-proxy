@@ -69,7 +69,7 @@ oauth_scope: '{{ oauth_provider_scopes.get(oauth_provider, "") }}'
 
 # Consul
 oauth_consul_service_port: '{{ oauth_local_port }}'
-oauth_consul_service_name: 'oauth-proxy'
+oauth_consul_service_name: '{{ oauth_service_name }}'
 oauth_consul_service_id: 'oauth-proxy:{{ oauth_domain }}'
 oauth_consul_service_tags: ['oauth-proxy', 'ssl-proxy-backend', 'site']
 
