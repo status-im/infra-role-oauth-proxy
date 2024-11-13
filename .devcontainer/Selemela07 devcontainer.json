@@ -1,0 +1,78 @@
+{
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "features": {
+  }
+}// Import necessary namespaces
+open Microsoft.Quantum.Canon;
+open Microsoft.Quantum.Intrinsic;
+open Microsoft.Quantum.Measurement;
+open Microsoft.Quantum.Simulation;
+
+// Define a namespace for the smart contract
+namespace SmartContract {
+    // Define a class for the smart contract
+    public class MyContract {
+        // Define a class variable to store the state
+        private mutable Result state = new Result();
+
+        // Define a function to initialize the contract
+        operation Initialize() : Unit {
+            // Initialize the contract state
+            state.Value = 0;
+        }
+
+        // Define a function to increment the contract state
+        operation Increment() : Unit {
+            // Increment the state value
+            state.Value += 1;
+        }
+
+        // Define a function to decrement the contract state
+        operation Decrement() : Unit {
+            // Decrement the state value
+            state.Value -= 1;
+        }
+
+        // Define a function to get the current state
+        operation GetState() : Result {
+            return state;
+        }
+    }
+}
+
+// Define a class to deploy and run the smart contract
+public class DeployContract {
+    // Define a class variable to store the contract
+    private MyContract contract;
+
+    // Define a function to deploy the contract
+    operation Deploy() : Unit {
+        // Create a new instance of the smart contract
+        contract = new MyContract();
+        // Deploy the contract
+        contract.Initialize();
+    }
+
+    // Define a function to run the contract
+    operation Run() : Unit {
+        // Run the contract
+        contract.Increment();
+        contract.Decrement();
+        // Print the current state
+        Message("Current state: " + IntAsString(contract.GetState().Value));
+    }
+}
+
+// Define a class to simulate the contract
+public class SimulateContract {
+    // Define a function to simulate the contract
+    operation Simulate() : Unit {
+        // Create a new instance of the simulator
+        using (var simulator = new Simulator()) {
+            // Simulate the contract
+            var deployContract = new DeployContract();
+            deployContract.Deploy();
+            deployContract.Run();
+        }
+    }
+}
