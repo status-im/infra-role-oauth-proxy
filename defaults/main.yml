@@ -54,6 +54,7 @@ oauth_keycloak_groups: []
 oauth_keycloak_roles: []
 oauth_keycloak_oidc_issuer_url: '{{ oauth_keycloak_url }}/realms/{{ oauth_keycloak_realm }}'
 oauth_keycloak_code_challenge_method: 'S256'
+oauth_keycloak_extra_audiences: ['account']
 
 # required auth options
 oauth_cookie_secret: ~
