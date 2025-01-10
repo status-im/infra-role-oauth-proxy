@@ -1,6 +1,6 @@
 ---
 services:
-  oauth:
+  '{{ oauth_service_name }}':
     container_name: '{{ oauth_cont_name }}'
     image: '{{ oauth_cont_image }}'
     restart: always
