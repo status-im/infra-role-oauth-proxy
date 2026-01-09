@@ -54,6 +54,10 @@ oauth_compose_skip_start: true
 oauth_upstream_addr:  'container-webui'
 ```
 
+### Consul
+
+Additional consul tags can be set with: `oauth_consul_service_tags_additional`
+
 # Management
 
 The container is reated using Docker Compose:
@@ -77,4 +81,4 @@ We just had to increase proxy buffer sizes in the Nginx config and everything wa
   proxy_buffering on;
   proxy_buffers 16 256k;
   proxy_buffer_size 128k;
-``` 
+```
