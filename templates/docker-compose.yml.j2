@@ -54,6 +54,9 @@ services:
 {% for route in oauth_skip_auth_routes %}
       --skip-auth-route={{ route }}
 {% endfor %}
+{% for arg in oauth_extra_args %}
+      {{ arg }}
+{% endfor %}
 {% if oauth_cont_networks %}
 
 networks:
