@@ -67,6 +67,7 @@ oauth_provider_scopes:
   github: 'user:email read:org'
   keycloak-oidc: 'openid'
 oauth_scope: '{{ oauth_provider_scopes.get(oauth_provider, "") }}'
+oauth_extra_args: []
 
 # Consul
 oauth_consul_service_port: '{{ oauth_local_port }}'
