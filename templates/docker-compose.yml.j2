@@ -51,6 +51,9 @@ services:
 {% endif %}
       --request-logging=false
       --reverse-proxy=true
+{% for ip in oauth_trusted_proxy_ips %}
+      --trusted-proxy-ip='{{ ip }}'
+{% endfor %}
 {% for route in oauth_skip_auth_routes %}
       --skip-auth-route={{ route }}
 {% endfor %}
