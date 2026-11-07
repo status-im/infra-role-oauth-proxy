@@ -1,6 +1,6 @@
 # Description
 
-This role configures an [oauth2_proxy](https://github.com/pusher/oauth2_proxy) container for GitHub based OAuth.
+This role configures an [oauth2-proxy](https://github.com/oauth2-proxy/oauth2-proxy) container for GitHub based OAuth.
 
 # Configuration
 
