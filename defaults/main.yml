@@ -35,7 +35,9 @@ oauth_domain: ~
 oauth_callback: '/oauth2/callback'
 
 # Skip auth for these paths.
-oauth_skip_auth_routes: []
+# Disabled due to vulnerabilities in skip auth functionality:
+# https://github.com/oauth2-proxy/oauth2-proxy/security/advisories/GHSA-7x63-xv5r-3p2x
+#oauth_skip_auth_routes: []
 #  - 'POST=/ping'
 #  - '/webhook'
 

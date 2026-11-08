@@ -54,9 +54,12 @@ services:
 {% for ip in oauth_trusted_proxy_ips %}
       --trusted-proxy-ip='{{ ip }}'
 {% endfor %}
+{# Disabled due to vulnerabilities in skip auth functionality:
+ # https://github.com/oauth2-proxy/oauth2-proxy/security/advisories/GHSA-7x63-xv5r-3p2x
 {% for route in oauth_skip_auth_routes %}
       --skip-auth-route={{ route }}
 {% endfor %}
+#}
 {% for arg in oauth_extra_args %}
       {{ arg }}
 {% endfor %}
