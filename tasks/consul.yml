@@ -14,6 +14,14 @@
           version: '{{ oauth_version }}'
         checks:
           - id: 'oauth-proxy-health:{{ oauth_domain }}'
-            name: 'OAuth Proxy Healthcheck'
+            name: 'OAuth Proxy HTTP Healthcheck'
             type: 'http'
             http: 'http://localhost:{{ oauth_local_port }}/ping'
+            disabled: '{{ oauth_tls_enabled }}'
+
+          - id: 'oauth-proxy-health:{{ oauth_domain }}'
+            name: 'OAuth Proxy HTTPS Healthcheck'
+            type: 'http'
+            http: 'https://localhost:{{ oauth_local_port }}/ping'
+            tls_skip_verify: true
+            disabled: '{{ not oauth_tls_enabled }}'
