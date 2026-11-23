@@ -51,7 +51,7 @@ oauth_trusted_proxy_ips: []
 oauth_provider: 'github' # github, google, keycloak-oidc
 # Github
 oauth_github_org: 'status-im'
-oauth_github_teams: []
+oauth_github_teams: ['devops']
 # Google
 oauth_google_domain: 'status.im'
 # Keycloak
