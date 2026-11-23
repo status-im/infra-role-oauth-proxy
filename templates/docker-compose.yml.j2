@@ -7,8 +7,17 @@ services:
     ports:
       - '{{ oauth_local_addr }}:{{ oauth_local_port }}:{{ oauth_local_port | mandatory }}/tcp'
     extra_hosts: {{ oauth_cont_etc_hosts | to_json }}
-{% if oauth_cont_volumes %}
-    volumes: {{ oauth_cont_volumes | to_json }}
+{% if oauth_cont_volumes or oauth_tls_enabled %}
+    volumes:
+{% for volume in oauth_cont_volumes %}
+      - {{ volume | to_json }}
+{% endfor %}
+{% if oauth_tls_enabled %}
+      - type: bind
+        source: {{ oauth_tls_certs_path | mandatory | to_json }}
+        target: /certs
+        read_only: true
+{% endif %}
 {% endif %}
 {% if oauth_cont_networks %}
     networks: {{ oauth_cont_networks | to_json }}
@@ -44,7 +53,13 @@ services:
       --client-id='{{ oauth_id | mandatory }}'
       --client-secret='{{ oauth_secret | mandatory }}'
       --redirect-url='https://{{ oauth_domain }}{{ oauth_callback }}'
+{% if oauth_tls_enabled %}
+      --https-address='0.0.0.0:{{ oauth_local_port | mandatory }}'
+      --tls-cert-file='/certs/cert.ca-bundle'
+      --tls-key-file='/certs/cert.key'
+{% else %}
       --http-address='0.0.0.0:{{ oauth_local_port | mandatory }}'
+{% endif %}
       --upstream='{{ oauth_upstream_url | mandatory }}'
 {% if oauth_logo_url %}
       --custom-sign-in-logo={{ oauth_logo_url | mandatory }}

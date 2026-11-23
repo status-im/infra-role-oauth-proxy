@@ -1,4 +1,12 @@
 ---
+- name: 'OAuth Proxy | Validate TLS certificate path'
+  assert:
+    that:
+      - oauth_tls_certs_path is string
+      - oauth_tls_certs_path | default('', true) | length > 0
+    fail_msg: "'oauth_tls_certs_path' is required when 'oauth_tls_enabled' is true."
+  when: oauth_tls_enabled
+
 - name: 'OAuth Proxy | Create directory'
   file:
     path: '{{ oauth_service_path }}'

@@ -20,9 +20,12 @@ Some options are optional:
 ```yaml
 oauth_local_addr: '0.0.0.0'
 oauth_cont_volumes: ['/docker/example/www:/www']
+oauth_tls_enabled: true
+oauth_tls_certs_path: '/docker/example/certs'
 oauth_upstream_url: 'file:///www#/'
 oauth_cont_networks: ['other-container-network']
 ```
+Set `oauth_tls_enabled: true` to enable HTTPS. `oauth_tls_certs_path` is then required and must contain `cert.ca-bundle` and `cert.key`. The directory is mounted read-only at `/certs`; OAuth2 Proxy serves HTTPS on `oauth_local_port`. The certificate bundle must contain the server certificate and chain, and the key must match. Update the reverse proxy to connect to OAuth2 Proxy using HTTPS. TLS stays disabled by default.
 Different providers have different mandatory settings.
 
 ### GitHub
