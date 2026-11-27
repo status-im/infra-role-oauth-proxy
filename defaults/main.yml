@@ -55,8 +55,8 @@ oauth_github_teams: ['devops']
 # Google
 oauth_google_domain: 'status.im'
 # Keycloak
-oauth_keycloak_url: 'https://auth.logos.co'
-oauth_keycloak_realm: 'logos-co'
+oauth_keycloak_url: 'https://auth.infra.free.technology'
+oauth_keycloak_realm: 'ift'
 oauth_keycloak_domain: '*'
 oauth_keycloak_groups: []
 oauth_keycloak_roles: []
